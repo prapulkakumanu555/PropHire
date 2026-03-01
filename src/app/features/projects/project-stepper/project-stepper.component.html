@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Create New Project</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-stepper #stepper>
+        <!-- Step 1: Basic Details -->
+        <mat-step [stepControl]="detailsForm">
+            <ng-template matStepLabel>Project Details</ng-template>
+            <form [formGroup]="detailsForm" class="step-form">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Project Name</mat-label>
+                    <input matInput formControlName="name" placeholder="E.g. Digital Transformation">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Project Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option value="On-site">On-site</mat-option>
+                        <mat-option value="Off-site">Off-site</mat-option>
+                    </mat-select>
+                    <mat-hint *ngIf="detailsForm.get('type')?.value === 'On-site'">
+                        <strong>Note:</strong> On-site projects require minimum 2 trainings.
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Assign Client</mat-label>
+                    <mat-select formControlName="clientId">
+                        <mat-option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="stepper-actions">
+                    <button mat-flat-button color="primary" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- Step 2: Training Requirements -->
+        <mat-step>
+            <ng-template matStepLabel>Training Setup</ng-template>
+            <div class="step-form">
+                <p class="logic-info" [class.error]="!isTrainingValid">
+                    Current Trainings: {{ trainings.length }}
+                    <span *ngIf="detailsForm.get('type')?.value === 'On-site' && trainings.length < 2">
+                        (Minimum 2 required for On-site)
+                    </span>
+                </p>
+
+                <div [formGroup]="trainingForm">
+                    <div formArrayName="trainings">
+                        <div *ngFor="let t of trainings.controls; let i=index" [formGroupName]="i"
+                            class="training-row card">
+                            <div class="row-header">
+                                <h4>Training #{{ i + 1 }}</h4>
+                                <button mat-icon-button color="warn" (click)="removeTraining(i)"
+                                    *ngIf="trainings.length > 1">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+
+                            <div class="row-fields">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select formControlName="type">
+                                        <mat-option *ngFor="let type of trainingTypes" [value]="type">{{ type
+                                            }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Who Pays?</mat-label>
+                                    <mat-select formControlName="payer">
+                                        <mat-option *ngFor="let p of payerTypes" [value]="p">{{ p }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-checkbox formControlName="certificationRequired" color="primary">Certification
+                                    Required</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button mat-stroked-button (click)="addTraining()" class="add-btn">
+                    <mat-icon>add</mat-icon> Add Another Training
+                </button>
+
+                <div class="stepper-actions">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-flat-button color="primary" [disabled]="!isTrainingValid" matStepperNext>Review</button>
+                </div>
+            </div>
+        </mat-step>
+
+        <!-- Step 3: Confirmation -->
+        <mat-step>
+            <ng-template matStepLabel>Confirm</ng-template>
+            <div class="summary">
+                <h3>Summary</h3>
+                <p><strong>Project:</strong> {{ detailsForm.value.name }}</p>
+                <p><strong>Type:</strong> {{ detailsForm.value.type }}</p>
+                <p><strong>Trainings:</strong> {{ trainings.length }}</p>
+            </div>
+            <div class="stepper-actions">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-flat-button color="primary" (click)="onSubmit()">Create Project</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</mat-dialog-content>

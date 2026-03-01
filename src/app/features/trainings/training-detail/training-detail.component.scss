@@ -1,0 +1,113 @@
+.detail-container {
+    padding: 32px;
+    background-color: #f4f3f3;
+    min-height: calc(100vh - 64px);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back-nav {
+    margin-bottom: 24px;
+
+    button {
+        color: #3f51b5;
+        font-weight: 500;
+    }
+}
+
+.course-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.image-section img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+
+    .tags {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            mat-icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+            }
+
+            &.duration {
+                background: #e3f2fd;
+                color: #1565c0;
+            }
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+        color: #3f51b5;
+    }
+
+    .instructor {
+        color: #666;
+        margin-bottom: 24px;
+    }
+
+    .full-desc {
+        margin-bottom: 32px;
+
+        h3 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        gap: 16px;
+        margin-top: auto;
+
+        button {
+            padding: 8px 32px;
+            font-weight: 600;
+        }
+    }
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}

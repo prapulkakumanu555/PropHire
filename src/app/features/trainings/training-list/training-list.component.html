@@ -1,0 +1,44 @@
+<div class="training-container">
+    <header class="training-header">
+        <div class="header-content">
+            <h2>Available Training Courses</h2>
+            <p>Enhance your skills with our curated professional development programs.</p>
+        </div>
+    </header>
+
+    <ng-container *ngIf="courses$ | async as courses; else loading">
+        <div class="course-grid" *ngIf="courses && courses.length > 0; else noCourses">
+            <mat-card class="course-card" *ngFor="let course of courses">
+                <div class="card-image-container">
+                    <img mat-card-image [src]="course.imageUrl" [alt]="course.title">
+                </div>
+                <mat-card-header>
+                    <mat-card-title>{{ course.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ course.duration }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ course.description }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-flat-button color="primary" [routerLink]="['/trainings', course.id]">
+                        VIEW DETAILS
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+        <ng-template #noCourses>
+            <div class="empty-state">
+                <mat-icon>school</mat-icon>
+                <p>No training courses available at the moment.</p>
+            </div>
+        </ng-template>
+    </ng-container>
+
+    <ng-template #loading>
+        <div class="loading-state">
+            <mat-spinner diameter="40"></mat-spinner>
+            <p>Loading courses...</p>
+        </div>
+    </ng-template>
+</div>

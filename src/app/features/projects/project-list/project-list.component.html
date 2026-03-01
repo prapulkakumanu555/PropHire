@@ -1,0 +1,33 @@
+<div class="page-header">
+    <h2>Projects</h2>
+    <button mat-flat-button color="primary" (click)="openProjectStepper()">
+        <mat-icon>add</mat-icon> New Project
+    </button>
+</div>
+
+<mat-table [dataSource]="projects" class="mat-elevation-z2">
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Project Name</mat-header-cell>
+        <mat-cell *matCellDef="let p">{{ p.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let p">
+            <span class="badge" [ngClass]="p.type.toLowerCase()">{{ p.type }}</span>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let p">{{ p.status }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let p">{{ p.createdAt | date:'short' }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

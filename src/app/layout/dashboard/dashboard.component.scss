@@ -1,0 +1,98 @@
+.header-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.app-title {
+    margin-left: 1rem;
+    font-weight: 500;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.user-profile-btn {
+    display: flex;
+    align-items: center;
+    padding: 0 16px !important;
+    height: 40px;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.user-display-info {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sidenav-container {
+    height: calc(100vh - 64px);
+    background-color: #f7f9fa;
+}
+
+.sidenav {
+    width: 260px;
+    background-color: white;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+
+    .active {
+        background-color: rgba(63, 81, 181, 0.1);
+        /* Indigo tint */
+        color: #3f51b5;
+
+        mat-icon {
+            color: #3f51b5;
+        }
+    }
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 0; // Remove general padding, add back to sections
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1; // Grow to fill space and push footer down
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.welcome-banner {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-top: 2rem;
+
+    h2 {
+        color: #3f51b5;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+}
+
+.client-header {
+    margin: 10px;
+}

@@ -1,0 +1,64 @@
+.dashboard-home {
+    padding: 24px;
+    background-color: #f4f3f3;
+    /* Light pink background from image */
+    min-height: calc(100vh - 64px);
+    /* Subtract toolbar height */
+}
+
+.dashboard-header {
+    margin-bottom: 32px;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3f51b5;
+        margin: 0;
+    }
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+}
+
+.stat-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 8px;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    mat-card-header {
+        margin-bottom: 16px;
+
+        .mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+        }
+
+        mat-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        mat-card-subtitle {
+            font-size: 0.875rem;
+            color: #757575;
+        }
+    }
+
+    .stat-value {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 8px 0 0;
+        color: #424242;
+    }
+}

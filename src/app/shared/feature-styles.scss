@@ -1,0 +1,99 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2 {
+        margin: 0;
+    }
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &.on-site {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    &.off-site {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+}
+
+.step-form {
+    padding-top: 1rem;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.stepper-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.training-row {
+    border: 1px solid #eee;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #fafafa;
+
+    .row-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .row-fields {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+
+        mat-form-field {
+            flex: 1;
+            min-width: 150px;
+        }
+    }
+}
+
+.logic-info {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+
+    &.error {
+        color: #f44336;
+        font-weight: 500;
+    }
+}
+
+.add-btn {
+    margin-top: 1rem;
+}
+
+.summary {
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+}

@@ -1,0 +1,35 @@
+<div class="detail-container" *ngIf="course$ | async as course; else loader">
+    <div class="back-nav">
+        <button mat-button routerLink="/trainings">
+            <mat-icon>arrow_back</mat-icon> Back to Courses
+        </button>
+    </div>
+
+    <div class="course-detail-layout">
+        <div class="image-section">
+            <img [src]="course.imageUrl" [alt]="course.title">
+        </div>
+
+        <div class="info-section">
+            <h1>{{ course.title }}</h1>
+            <p class="instructor">Instructor: <strong>{{ course.instructor }}</strong></p>
+
+            <div class="full-desc">
+                <h3>Course Overview</h3>
+                <p>{{ course.fullDescription }}</p>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button color="primary">ENROLL NOW</button>
+                <button mat-stroked-button color="accent">ADD TO WISHLIST</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loader>
+    <div class="loading-state">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Fetching course details...</p>
+    </div>
+</ng-template>

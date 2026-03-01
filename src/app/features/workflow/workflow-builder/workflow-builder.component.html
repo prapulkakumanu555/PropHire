@@ -1,0 +1,63 @@
+<div class="wf-layout">
+    <!-- Left Side Palette -->
+    <div class="wfb-sidebar" cdkDropList cdkDropListSortingDisabled [cdkDropListConnectedTo]="['canvasList']">
+        <h3>Node Palette</h3>
+        <mat-divider></mat-divider>
+        <div class="node-list">
+            <div class="palette-node" *ngFor="let nodeType of availableNodes" cdkDrag [cdkDragData]="nodeType">
+                <mat-icon>{{ nodeType.includes('Decision') ? 'call_split' : 'stop_circle' }}</mat-icon>
+                {{ nodeType }}
+            </div>
+        </div>
+
+        <div class="actions">
+            <button mat-raised-button color="primary" class="full-btn" (click)="save()">Save Workflow</button>
+            <button mat-stroked-button class="full-btn" (click)="load()">Load Example JSON</button>
+        </div>
+    </div>
+
+    <!-- Right Side Canvas -->
+    <div class="wfb-canvas-area" #canvas id="canvasList" cdkDropList (cdkDropListDropped)="drop($event)"
+        (click)="cancelConnection()">
+
+        <!-- SVG Area for Drawing Connections -->
+        <svg class="connection-layer">
+            <!-- Existing Connections -->
+            <ng-container *ngFor="let conn of connections$ | async">
+                <ng-container *ngIf="getNodeById(conn.sourceId) as src">
+                    <ng-container *ngIf="getNodeById(conn.targetId) as tgt">
+                        <!-- Centers of nodes (assuming 150px w, 50px h) -->
+                        <path class="conn-line" [attr.d]="getCurvedPath(src.x + 150, src.y + 25, tgt.x, tgt.y + 25)">
+                        </path>
+                        <!-- Delete Button for connection (approximated midpoint) -->
+                        <circle class="conn-delete" [attr.cx]="src.x + 150 + (tgt.x - (src.x + 150))/2"
+                            [attr.cy]="src.y + 25 + (tgt.y + 25 - (src.y + 25))/2" r="8"
+                            (click)="deleteConnection(conn.id)" />
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+
+            <!-- Connection Under Construction -->
+            <path *ngIf="connectingSourceNode" class="conn-line-draft"
+                [attr.d]="getCurvedPath(connectingSourceNode.x + 150, connectingSourceNode.y + 25, mousePos.x, mousePos.y)">
+            </path>
+        </svg>
+
+        <!-- Canvas Nodes -->
+        <div *ngFor="let node of nodes$ | async" class="canvas-node"
+            [ngClass]="node.type.replace(' ', '-').toLowerCase()" cdkDrag cdkDragBoundary=".wfb-canvas-area"
+            [cdkDragFreeDragPosition]="{x: 0, y: 0}" (cdkDragEnded)="onNodeDragEnded($event, node)"
+            [style.transform]="'translate3d(' + node.x + 'px, ' + node.y + 'px, 0)'"
+            (click)="completeConnection(node, $event)">
+
+            <div class="node-header">
+                <span class="title">{{ node.label }}</span>
+                <mat-icon class="delete-icon" (click)="deleteNode(node.id, $event)">close</mat-icon>
+            </div>
+
+            <!-- Connection Points -->
+            <div class="port port-out" (click)="startConnection(node, $event)" title="Click to start connection"></div>
+            <div class="port port-in"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="page-header">
+    <h2>Trainee Lifecycle Tracking</h2>
+</div>
+
+<mat-table [dataSource]="trainees" class="mat-elevation-z2">
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let t">{{ t.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let t">{{ t.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="stage">
+        <mat-header-cell *matHeaderCellDef>Current Stage</mat-header-cell>
+        <mat-cell *matCellDef="let t">
+            <mat-chip-set>
+                <mat-chip [color]="getStageColor(t.currentStage)" selected>{{ t.currentStage }}</mat-chip>
+            </mat-chip-set>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

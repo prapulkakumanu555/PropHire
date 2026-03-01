@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Client' : 'Add Client' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="clientForm">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Client Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Industry</mat-label>
+            <input matInput formControlName="industry">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" [disabled]="clientForm.invalid" (click)="onSubmit()">
+        {{ isEdit ? 'Update' : 'Create' }}
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Vendor' : 'Add New Vendor' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()" class="form-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Vendor Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter vendor name">
+            <mat-error *ngIf="vendorForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="email@example.com">
+            <mat-error *ngIf="vendorForm.get('email')?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="vendorForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+        </mat-form-field>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone" placeholder="Enter phone number">
+                <mat-error *ngIf="vendorForm.get('phone')?.hasError('required')">Phone is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Company</mat-label>
+                <input matInput formControlName="company" placeholder="Enter company name">
+                <mat-error *ngIf="vendorForm.get('company')?.hasError('required')">Company is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="Active">Active</mat-option>
+                <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="vendorForm.invalid" (click)="onSubmit()">
+        {{ isEdit ? 'Update' : 'Add' }}
+    </button>
+</mat-dialog-actions>
