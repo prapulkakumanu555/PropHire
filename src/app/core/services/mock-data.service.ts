@@ -13,7 +13,7 @@ export class MockDataService implements InMemoryDbService {
         const users: User[] = [
             { id: '1', email: 'prapul@prophire.com', name: 'Prapul Kumar', role: 'CLIENT', img: '/assets/images/prapul.png' },
             { id: '2', email: 'venkat@prophire.com', name: 'Venkat', role: 'ACCOUNT_MANAGER', img: '/assets/images/venkat.png' },
-            { id: '3', email: 'prem@prophire.com', name: 'Prem', role: 'ACCOUNT_MANAGER', img: '/assets/images/prem.png' }
+            { id: '3', email: 'pavan@prophire.com', name: 'Pavan', role: 'ACCOUNT_MANAGER', img: '/assets/images/pavan.png' }
         ];
 
         const clients: Client[] = [
